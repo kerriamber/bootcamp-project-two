@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import sequelize from "./db/connection.js";
-import apiRoutes from "./routes/index.js";
+import { apiRoutes } from "./routes/index.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 3001;
