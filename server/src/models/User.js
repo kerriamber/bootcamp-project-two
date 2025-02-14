@@ -31,7 +31,7 @@ export function UserFactory() {
       },
     },
     {
-      tableName: "users",
+      modelName: "user",
       sequelize,
       hooks: {
         beforeCreate: async (user) => {
