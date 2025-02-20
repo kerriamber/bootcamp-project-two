@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import bcrypt from "bcrypt";
+import sequelize from "../db/connection.js";
 
 export class User extends Model {
   id;
@@ -43,4 +44,6 @@ export function UserFactory() {
       },
     }
   );
+
+  return User;
 }

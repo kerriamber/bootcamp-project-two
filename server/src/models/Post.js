@@ -1,4 +1,5 @@
 import { DataTypes, Model } from "sequelize";
+import sequelize from "../db/connection.js";
 import bcrypt from "bcrypt";
 
 export class Post extends Model {
@@ -14,7 +15,10 @@ export function PostFactory() {
         autoIncrement: true,
         primaryKey: true,
       },
-      title: {},
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       author: {
         type: DataTypes.INTEGER,
       },
@@ -29,4 +33,6 @@ export function PostFactory() {
       modelName: "post",
     }
   );
+
+  return Post;
 }
