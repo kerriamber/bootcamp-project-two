@@ -10,6 +10,7 @@ export class User extends Model {
 
   async setPassword(password) {
     const saltRounds = 10;
+    console.log('setPassword() user model');
     this.password = await bcrypt.hash(password, saltRounds);
   }
 }
@@ -36,6 +37,9 @@ export function UserFactory() {
       sequelize,
       hooks: {
         beforeCreate: async (user) => {
+          console.log('User::beforeCreate');
+          
+          console.log(user);
           await user.setPassword(user.password);
         },
         beforeUpdate: async (user) => {
