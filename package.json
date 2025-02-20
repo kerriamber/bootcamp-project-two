@@ -4,7 +4,9 @@
   "description": "name forthcoming",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\""
+    "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\"",
+    "start": "cd server && npm run start",
+    "build": "cd client && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -12,7 +14,7 @@
     "concurrently": "^9.1.2"
   },
   "dependencies": {
-    "bootstrap": "^5.3.3"
+    "bootstrap": "^5.3.3",
     "pg": "^8.13.3"
   }
 }
