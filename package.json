@@ -4,6 +4,7 @@
   "description": "name forthcoming",
   "main": "index.js",
   "scripts": {
+    "install": "cd client && npm i && cd ../server && npm i",
     "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\"",
     "start": "cd server && npm run start",
     "build": "cd client && npm run build"
