@@ -12,9 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", apiRoutes);
 
-app.get("/api/test", (_req, res) => res.send("testing api! it works!"));
-
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync(/*{ force: true }*/).then(() => {
   app.listen(PORT, () => {
     console.log(`Express Server listening on port ${PORT}`);
   });
