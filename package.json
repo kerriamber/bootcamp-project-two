@@ -4,7 +4,10 @@
   "description": "name forthcoming",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\""
+    "install": "cd client && npm i && cd ../server && npm i",
+    "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\"",
+    "start": "cd server && npm run start",
+    "build": "cd client && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +15,6 @@
     "concurrently": "^9.1.2"
   },
   "dependencies": {
-    "pg": "^8.13.3"
+    "vite": "^6.1.1"
   }
 }

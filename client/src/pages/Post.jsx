@@ -1,3 +1,5 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+
 export default function Post() {
-  return <div>This is the post page</div>;
+  return (<>This is a fragment.</>);
 }

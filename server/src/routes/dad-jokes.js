@@ -1,6 +1,7 @@
 import { Router } from "express";
 const router = Router();
 
+// api/dad-jokes/joke
 router.get("/joke", async (_req, res) => {
   // This route did not require an api key, so we just
   // put it on the backend anyway to show we know how
@@ -12,7 +13,7 @@ router.get("/joke", async (_req, res) => {
     },
   });
 
-  res.json(joke);
+  res.json(await joke.json());
 });
 
 export { router as dadJokeRoutes };
