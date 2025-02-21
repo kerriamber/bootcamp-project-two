@@ -11,7 +11,7 @@ export class User extends Model {
   async setPassword(password) {
     const saltRounds = 10;
     console.log('setPassword() user model');
-    this.password = await bcrypt.hash(password, saltRounds);
+    this.dataValues.password = await bcrypt.hash(password, saltRounds);
   }
 }
 
@@ -25,27 +25,39 @@ export function UserFactory() {
       },
       username: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false,
+        // validate: {
+        //   notNull: {
+        //     msg: 'Please enter a password',
+        //   },
+        //   // ! Now that we utilize hooks, we can include the password length validation here.
+        //   len: {
+        //     args: [8, 20],
+        //     msg: 'Your password must be between 8 and 20 characters',
+        //   },
+        // },
       },
     },
     {
-      modelName: "user",
-      sequelize,
       hooks: {
         beforeCreate: async (user) => {
           console.log('User::beforeCreate');
           
           console.log(user);
-          await user.setPassword(user.password);
+          await user.setPassword(user.dataValues.password);
         },
         beforeUpdate: async (user) => {
           await user.setPassword(user.password);
         },
       },
+      sequelize,
+      timestamps: false,
+      underscored: true,
+      modelName: "user",
     }
   );
 

@@ -6,6 +6,10 @@ const router = Router();
 router.post("/", async (req, res) => {
     try {
         const { username, password } = req.body;
+        console.log("POST /api/users");
+        // console.log(req);
+        
+        
         const userData = await User.create(req.body);
         res.status(200).json(userData);
     } catch (err) {
