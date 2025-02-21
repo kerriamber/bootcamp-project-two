@@ -4,22 +4,19 @@ import { User } from "../models/index.js";
 const router = Router();
 
 router.post("/", async (req, res) => {
-    try {
-        const { username, password } = req.body;
-        console.log("POST /api/users");
-        // console.log(req);
-        
-        
+    try {        
         const userData = await User.create(req.body);
-        res.status(200).json(userData);
+        res.status(200).json(
+            userData
+        );
     } catch (err) {
         console.log(err);
         res.status(400).json(err);
     }
 });
 
-router.get("/", async (req, res) => {
-    const users = User.findAndCountAll();
+router.get("/", async (_req, res) => {
+    const users = await User.findAll();
     res.status(200).json(users);
 });
 
