@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./ErrorPage.jsx";
 import Login from "./pages/Login.jsx";
 import Post from "./pages/Post.jsx";
+import AllPosts from "./pages/AllPosts.jsx";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 // TODO: import bootstrap
 
@@ -19,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/post",
         element: <Post />,
+      },
+      {
+        path: "/allposts",
+        element: <AllPosts />,
       },
     ],
   },
