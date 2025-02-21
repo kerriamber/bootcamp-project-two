@@ -3,14 +3,9 @@ import bcrypt from "bcrypt";
 import sequelize from "../db/connection.js";
 
 export class User extends Model {
-  id;
-  username;
-  email;
-  password;
-
   async setPassword(password) {
     const saltRounds = 10;
-    console.log('setPassword() user model');
+    // console.log('setPassword() user model');
     this.dataValues.password = await bcrypt.hash(password, saltRounds);
   }
 }
@@ -25,7 +20,8 @@ export function UserFactory() {
       },
       username: {
         type: DataTypes.STRING,
-        // allowNull: false,
+        unique: true,
+        allowNull: false,
       },
       password: {
         type: DataTypes.STRING,
@@ -41,14 +37,15 @@ export function UserFactory() {
         //   },
         // },
       },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
     },
     {
       hooks: {
         beforeCreate: async (user) => {
-          console.log('User::beforeCreate');
-          
-          console.log(user);
-          await user.setPassword(user.dataValues.password);
+          await user.setPassword(user.password);
         },
         beforeUpdate: async (user) => {
           await user.setPassword(user.password);
