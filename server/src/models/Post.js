@@ -31,7 +31,7 @@ export function PostFactory() {
       sequelize,
       timestamps: true,
       modelName: "post",
-    }
+    },
   );
 
   return Post;

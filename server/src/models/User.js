@@ -39,8 +39,8 @@ export function UserFactory() {
       },
       email: {
         type: DataTypes.STRING,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     },
     {
       hooks: {
@@ -55,7 +55,7 @@ export function UserFactory() {
       timestamps: false,
       underscored: true,
       modelName: "user",
-    }
+    },
   );
 
   return User;
