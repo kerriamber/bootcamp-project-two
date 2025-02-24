@@ -1,51 +1,53 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 import "./AllPosts.css"; // Custom CSS file
+import { useState, useEffect } from "react";
+import { getRandomCoffeeSrc } from "../api/coffee";
+import { getAllPosts } from "../api/posts";
 
-
-export default function AllPosts (){
-
-    const [backgroundImage, setBackgroundImage] = useState("");
+export default function AllPosts() {
+  const [backgroundImage, setBackgroundImage] = useState("");
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     // Fetch a random image from Unsplash (or use your own API)
-    const imageUrl = `https://source.unsplash.com/random/1600x900`;
-    setBackgroundImage(imageUrl);
+    async function loadData() {
+      setBackgroundImage(await getRandomCoffeeSrc());
+      setPosts(await getAllPosts());
+    }
+
+    loadData();
   }, []);
 
-return (
+  return (
     <div>
-    <div
-      className="background-container"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        filter: "blur(10px)",
-      }}
-    ></div>
-       <div className="mx-auto p-3  fs-2" style={{width: "400px"}}>
-            <NavLink to = "/post">Create New Reflection</NavLink>
-        </div>
-        <div className="container mt-4">
-            <div
-                className="border rounded p-3 shadow-sm"
-                style={{
-                    height: "500px",
-                    overflowY: "auto",
-                    background: "#f8f9fa",
-                }}
-            >
-                {[...Array(10)].map((_, index) => (
-                <div key={index} className="card mb-3">
-                    <div className="card-body">
-                        <h5 className="card-title">Card {index + 1}</h5>
-                        <p className="card-text">
-                            This is some example content for card {index + 1}.
-                        </p>
-                    </div>
-                </div>
-                ))}
+      <div
+        className="background-container"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      />
+      <span className="p-3 fs-2 bg-white d-flex align-items-center">
+        <NavLink className="btn btn-secondary mx-auto" to="/post">
+          Create New Reflection
+        </NavLink>
+      </span>
+      <div className="container mt-4 mx-auto">
+        <div className="border rounded p-3 shadow-sm bg-black col-lg-6 mx-auto">
+          {posts.length === 0 && (
+            <div className="d-flex align-items-center text-white justify-content-between">
+              <span className="spinner-border" />
+              <span>...Loading Posts</span>
             </div>
+          )}
+          {posts.map((post, index) => (
+            <div key={index} className="card mb-3">
+              <div className="card-body">
+                <h5 className="card-title">{post.title}</h5>
+                <h6 className="card-title">Author: {post.author}</h6>
+                <p className="card-text">{post.text.slice(0, 20)}...</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
-    </div>
-)}
+  );
+}
