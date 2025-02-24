@@ -5,8 +5,7 @@ import sequelize from "../db/connection.js";
 export class User extends Model {
   async setPassword(password) {
     const saltRounds = 10;
-    // console.log('setPassword() user model');
-    this.dataValues.password = await bcrypt.hash(password, saltRounds);
+    this.password = await bcrypt.hash(password, saltRounds);
   }
 }
 
@@ -25,17 +24,12 @@ export function UserFactory() {
       },
       password: {
         type: DataTypes.STRING,
-        // allowNull: false,
-        // validate: {
-        //   notNull: {
-        //     msg: 'Please enter a password',
-        //   },
-        //   // ! Now that we utilize hooks, we can include the password length validation here.
-        //   len: {
-        //     args: [8, 20],
-        //     msg: 'Your password must be between 8 and 20 characters',
-        //   },
-        // },
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'Please enter a password',
+          }
+        },
       },
       email: {
         type: DataTypes.STRING,
