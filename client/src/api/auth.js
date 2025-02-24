@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 export async function loginToAccount(username, password) {
-  console.log(username, password);
-  // ask server for token in exchange for login credentials
+  const navigate = useNavigate();
+  // ask server for an httpOnly cookie containing the token, and
+  // on success redirect to /allposts
   // if the server responds with 403 status, then alert the user
   // that the login was incorrect
   try {
@@ -14,8 +17,7 @@ export async function loginToAccount(username, password) {
     });
 
     if (response.ok) {
-      const { token } = await response.json();
-      if (token) localStorage.setItem("authToken", token);
+      navigate("/allposts");
     }
   } catch (err) {
     console.log(err);
@@ -35,10 +37,7 @@ export async function createAccount(username, password, email) {
     });
 
     if (response.ok) {
-      // once the account is created, login with the already provided
-      // credentials:
-      const { token } = await response.json();
-      localStorage.setItem("authToken", token);
+      // once the account is created, login with httpOnly cookie that should have been set:
       loginToAccount(username, password);
     } else if (response.status === 403) {
       // TODO: replace with more desciption and a better ui component
