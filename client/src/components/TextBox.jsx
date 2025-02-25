@@ -35,7 +35,7 @@ export default function TextBox({ onSubmit }) {
   };
 
   return (
-    <div className="card shadow p-4 rounded-4" style={{ width: "600px", background: "#fff" }}>
+    <div className="card shadow p-4 rounded-4 h-75 m-1 col-lg-6">
       <h3 className="text-center">Create New Post</h3>
       <form onSubmit={handleSubmit}>
         <input
@@ -47,7 +47,7 @@ export default function TextBox({ onSubmit }) {
           required
         />
         <textarea
-          className="form-control mt-3"
+          className="form-control mt-3 h-100"
           rows="4"
           placeholder="What's on Your Mind...?"
           value={postContent}
