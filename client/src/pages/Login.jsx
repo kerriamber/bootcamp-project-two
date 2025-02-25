@@ -53,14 +53,13 @@ export default function Login() {
 
   async function createAccount() {
     try {
-      console.log(email);
       // send a post request, then store the returned token in localstorage:
       const response = await fetch("/api/users", {
         method: "POST",
-        header: {
+        headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password, email }),
+        body: JSON.stringify({ username, password, email })
       });
   
       if (response.ok) {
