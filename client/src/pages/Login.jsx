@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { loginToAccount, createAccount } from "../api/auth.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMugHot } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -131,3 +132,4 @@ export default function Login() {
     </div>
   );
 }
+
