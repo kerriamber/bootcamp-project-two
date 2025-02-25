@@ -26,7 +26,7 @@ export default function Post() {
       const response = await fetch("/api/posts", {
         method: "POST",
         "Content-Type": "application/json",
-        body: JSON.stringify(),
+        body: JSON.stringify({ joke, text, coffee: coffeeSrc }),
       });
 
       if (response.ok) {
