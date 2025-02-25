@@ -15,9 +15,6 @@ export function PostFactory() {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      author: {
-        type: DataTypes.INTEGER,
-      },
       text: {
         type: DataTypes.TEXT,
         allowNull: false,
