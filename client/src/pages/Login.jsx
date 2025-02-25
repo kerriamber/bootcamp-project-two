@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { loginToAccount, createAccount } from "../api/auth.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMugHot } from "@fortawesome/free-solid-svg-icons";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -28,16 +30,17 @@ export default function Login() {
         style={{
           width: "600px",
           height: `${creatingAccount ? "625px" : "500px"}`,
-          background: "linear-gradient(to bottom,rgb(245, 94, 94), #4a69bd)",
+          background: "linear-gradient(to bottom,rgb(100, 55, 18),rgba(214, 129, 31, 0.81))",
           color: "white",
           padding: "30px",
         }}
       >
         <h2
-          className="text-center fw-bold fs-4"
+          className="text-center fw-bold fs-3"
           style={{ marginBottom: "40px" }}
         >
-          WELCOME BACK
+          <FontAwesomeIcon icon={faMugHot} className="me-2" />
+          COFFEE DAD JOKE BLOG
         </h2>
 
         <div className="mb-5">
@@ -92,7 +95,7 @@ export default function Login() {
               className="btn btn-link text-white py-0"
               onClick={() => setCreatingAccount(!creatingAccount)}
             >
-              {creatingAccount ? "Login Instead" : "Create Account Instead"}
+              {creatingAccount ? "Have an account? Login Here!" : "Not a User? Create Account "}
             </button>
           </div>
         </div>
@@ -116,6 +119,7 @@ export default function Login() {
                 : () => loginToAccount(username, password)
             }
           >
+            <FontAwesomeIcon icon={faMugHot} className="me-2" />
             {creatingAccount ? "CREATE ACCOUNT" : "LOGIN"}
           </button>
         </div>
