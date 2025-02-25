@@ -1,11 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../db/connection.js";
-import bcrypt from "bcrypt";
 
-export class Post extends Model {
-  id;
-  text;
-}
+export class Post extends Model {}
 
 export function PostFactory() {
   Post.init(
@@ -26,6 +22,14 @@ export function PostFactory() {
         type: DataTypes.TEXT,
         allowNull: false,
       },
+      coffee: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      joke: {
+        type: DataTypes.TEXT,
+        alowNull: false,
+      }
     },
     {
       sequelize,
