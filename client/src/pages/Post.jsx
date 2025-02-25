@@ -10,7 +10,6 @@ export default function Post() {
 
   const [joke, setJoke] = useState();
   const [coffeeSrc, setCoffeeSrc] = useState();
-  const [text, setText] = useState("");
 
   useEffect(() => {
     async function loadData() {
@@ -21,12 +20,12 @@ export default function Post() {
     loadData();
   }, []);
 
-  const handlePostSubmit = async () => {
+  const handlePostSubmit = async (content) => {
     try {
       const response = await fetch("/api/posts", {
         method: "POST",
         "Content-Type": "application/json",
-        body: JSON.stringify({ joke, text, coffee: coffeeSrc }),
+        body: JSON.stringify({ joke, content, coffee: coffeeSrc }),
       });
 
       if (response.ok) {
