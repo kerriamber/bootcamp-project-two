@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useNavigation } from "react-router-dom";
 
 export default function Post() {
-  const navigation = useNavigation();
+  const navigate = useNavigation();
 
   const [joke, setJoke] = useState();
   const [coffeeSrc, setCoffeeSrc] = useState();
@@ -21,7 +21,24 @@ export default function Post() {
     loadData();
   }, []);
 
-  const handlePostSubmit = () => {};
+  const handlePostSubmit = async () => {
+    try {
+      const response = await fetch("/api/posts", {
+        method: "POST",
+        "Content-Type": "application/json",
+        body: JSON.stringify(),
+      });
+
+      if (response.ok) {
+        navigate("/allposts");
+      } else {
+        throw new Error("response to /allposts not ok");
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Failed to upload post.");
+    }
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
