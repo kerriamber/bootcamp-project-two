@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
         // destructure req.body so users can't pass in an id
         // and give themselves any (non-used) id they want
         const { username, email, password } = req.body;
-
+        console.log(req.body)
         const userData = await User.create({
             username: username,
             email: email,
@@ -26,6 +26,7 @@ router.post("/", async (req, res) => {
             email: userData.email
         });
     } catch (err) {
+      console.log(err);
         res.status(400).json(err);
     }
 });

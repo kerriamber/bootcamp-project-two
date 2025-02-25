@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { loginToAccount, createAccount } from "../api/auth.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -10,8 +10,10 @@ export default function Login() {
 
   const [loginButtonEnabled, setLoginButtonEnabled] = useState(formDataValid());
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    setLoginButtonEnabled(formDataValid);
+    setLoginButtonEnabled(formDataValid());
   }, [username, password, email]);
 
   function formDataValid() {
@@ -19,6 +21,59 @@ export default function Login() {
     const emailValid = email.trim() !== "";
     if (creatingAccount) return nameAndPassValid && emailValid;
     else return nameAndPassValid;
+  }
+
+  async function loginToAccount() {
+    // ask server for an httpOnly cookie containing the token, and
+    // on success redirect to /allposts
+    // if the server responds with 403 status, then alert the user
+    // that the login was incorrect
+    try {
+      // TODO: replace with correct backend path
+      const response = await fetch("/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+  
+      if (!response.ok) {
+       const { message } = await response.json();
+       alert(message);
+       return;
+      }
+
+      navigate("/allposts");
+    } catch (err) {
+      console.log(err);
+      alert("Error while trying to login.");
+    }
+  }
+
+  async function createAccount() {
+    try {
+      console.log(email);
+      // send a post request, then store the returned token in localstorage:
+      const response = await fetch("/api/users", {
+        method: "POST",
+        header: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password, email }),
+      });
+  
+      if (response.ok) {
+        // once the account is created, login with httpOnly cookie that should have been set:
+        loginToAccount(username, password);
+      } else if (response.status === 403) {
+        // TODO: replace with more desciption and a better ui component
+        alert("Login Failed.");
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Error on creating account! See console log for more.");
+    }
   }
 
   return (
@@ -66,7 +121,7 @@ export default function Login() {
           <div className="mb-5">
             <label className="form-label">Email</label>
             <input
-              type="email"
+              type="text"
               className="form-control form-control-lg rounded-pill"
               placeholder="Enter Email"
               value={email}
@@ -110,11 +165,7 @@ export default function Login() {
               fontWeight: "bold",
               fontSize: "20px",
             }}
-            onClick={
-              creatingAccount
-                ? () => createAccount(username, password, email)
-                : () => loginToAccount(username, password)
-            }
+            onClick={creatingAccount ? createAccount : loginToAccount}
           >
             {creatingAccount ? "CREATE ACCOUNT" : "LOGIN"}
           </button>
