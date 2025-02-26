@@ -7,6 +7,7 @@ import { getAllPosts } from "../api/posts";
 export default function AllPosts() {
   const [backgroundImage, setBackgroundImage] = useState("");
   const [posts, setPosts] = useState([]);
+  const [expandedPost, setExpandedPost] = useState({});
 
   useEffect(() => {
     // Fetch a random image from Unsplash (or use your own API)
@@ -41,7 +42,20 @@ export default function AllPosts() {
               <div className="card-body">
                 <h5 className="card-title">{post.title}</h5>
                 <h6 className="card-title">Author: {post.user.username}</h6>
-                <p className="card-text">{post.text.slice(0, 20)}...</p>
+                {expandedPost === post ? 
+                  <p className="card-text">{post.text}</p>
+                :
+                  <p className="card-text">{post.text.slice(0, 20)}...</p>
+                }
+                
+                <div className="text-end">
+                    <button 
+                    className="btn text-secondary"
+                    onClick={()=>setExpandedPost(post)}
+                    >
+                    {expandedPost !== post && "Expand Content"}
+                    </button>
+                </div>
               </div>
             </div>
           ))}
