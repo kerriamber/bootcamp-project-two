@@ -64,7 +64,7 @@ export default function Login() {
   
       if (response.ok) {
         // once the account is created, login with httpOnly cookie that should have been set:
-        loginToAccount(username, password);
+        loginToAccount();
       } else if (response.status === 403) {
         // TODO: replace with more desciption and a better ui component
         alert("Login Failed.");
