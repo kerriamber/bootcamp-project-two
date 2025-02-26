@@ -41,7 +41,7 @@ export default function AllPosts() {
             <div key={index} className="card mb-3">
               <div className="card-body">
                 <h5 className="card-title">{post.title}</h5>
-                <h6 className="card-title">Author: {post.author}</h6>
+                <h6 className="card-title">Author: {post.user.username}</h6>
                 <p className="card-text">{post.text.slice(0, 20)}...</p>
               </div>
             </div>
