@@ -31,13 +31,12 @@ export default function AllPosts() {
       </span>
       <div className="container mt-4 mx-auto">
         <div className="border rounded p-3 shadow-sm bg-black col-lg-6 mx-auto">
-          {posts.length === 0 && (
+          {posts && posts.length === 0 && (
             <div className="d-flex align-items-center text-white justify-content-between">
-              <span className="spinner-border" />
-              <span>...Loading Posts</span>
+              <span>No Posts Yet</span>
             </div>
           )}
-          {posts.map((post, index) => (
+          {posts?.map((post, index) => (
             <div key={index} className="card mb-3">
               <div className="card-body">
                 <h5 className="card-title">{post.title}</h5>

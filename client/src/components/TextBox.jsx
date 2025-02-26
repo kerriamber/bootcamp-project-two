@@ -10,7 +10,7 @@ export default function TextBox({ onSubmit }) {
 
     if (title.trim() === "" || postContent.trim() === "") return; // stop from posting empty
 
-    const newPost = { title, content: postContent };
+    const newPost = { title, text: postContent };
 
     setIsSubmitting(true); // Disable the button while submitting
 
@@ -24,8 +24,6 @@ export default function TextBox({ onSubmit }) {
       // Clear form fields
       setTitle("");
       setPostContent("");
-
-      alert("Post submitted successfully!");
     } catch (error) {
       console.error("Error submitting post:", error);
       alert("Error submitting post");

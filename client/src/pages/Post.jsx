@@ -3,13 +3,13 @@ import TextBox from "../components/TextBox";
 import { getRandomJoke } from "../api/joke";
 import { getRandomCoffeeSrc } from "../api/coffee";
 import { useState, useEffect } from "react";
-import { useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Post() {
-  const navigate = useNavigation();
+  const navigate = useNavigate();
 
-  const [joke, setJoke] = useState();
-  const [coffeeSrc, setCoffeeSrc] = useState();
+  const [joke, setJoke] = useState("");
+  const [coffeeSrc, setCoffeeSrc] = useState("");
 
   useEffect(() => {
     async function loadData() {
@@ -21,11 +21,13 @@ export default function Post() {
   }, []);
 
   const handlePostSubmit = async (content) => {
+    const {title, text} = content;
+    const coffee = coffeeSrc;
     try {
       const response = await fetch("/api/posts", {
         method: "POST",
-        "Content-Type": "application/json",
-        body: JSON.stringify({ joke, content, coffee: coffeeSrc }),
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ joke, title, text, coffee }),
       });
 
       if (response.ok) {
