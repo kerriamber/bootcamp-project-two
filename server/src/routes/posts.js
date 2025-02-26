@@ -12,9 +12,11 @@ router.get("/", async (req, res) => {
 
 // get post with id
 router.get("/:id", async (req, res) => {
-    const post = await Post.findOne({where: {
-        id: req.user.id,
-    }});
+    const post = await Post.findOne({
+        where: {
+            id: req.params.id,
+        }
+    });
     res.status(200).json(post);
 });
 
