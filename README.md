@@ -37,6 +37,10 @@ The main branch is continuously deployed to Render.com
 
 Visit https://bootcamp-project-two.onrender.com
 
+## Github Repository Link
+
+https://github.com/kerriamber/bootcamp-project-two
+
 ## Screenshot
 
 ![screen shot of app](capture.png)
