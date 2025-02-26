@@ -42,12 +42,15 @@ export default function Post() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div className="card shadow rounded-4 overflow-hidden col-lg-6 h-100 flex align-items-center">
+    <div className="container col-lg-8 text-center mx-auto mb-5">
         <div className="m-5 fst-italic fs-3">{joke}</div>
-        <img className="pb-5" src={coffeeSrc} alt="coffee image" />
+        <div className="fst-italic text-secondary">Start reflection in textbox below image...</div>
+        <div className="text-center">
+          <img className="pb-5 w-100" src={coffeeSrc} alt="coffee image" />
+        </div>
+      <div>
+        <TextBox onSubmit={handlePostSubmit} />
       </div>
-      <TextBox onSubmit={handlePostSubmit} />
     </div>
   );
 }

@@ -33,7 +33,7 @@ export default function TextBox({ onSubmit }) {
   };
 
   return (
-    <div className="card shadow p-4 rounded-4 h-75 m-1 col-lg-6">
+    <div className="card shadow p-4 rounded-4 h-75 m-1">
       <h3 className="text-center">Create New Post</h3>
       <form onSubmit={handleSubmit}>
         <input
